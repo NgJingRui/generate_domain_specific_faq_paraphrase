@@ -258,13 +258,4 @@ class T5Generator(BaseGenerator):
             res = sentence_return
         return res
 
-    def _save_intermediate_output(self, saveAll, outputPath, outputName):
-        import csv
-        import os
-        with open(outputName + ".csv", mode='w') as new_csv:
-            csv_writer = csv.writer(new_csv, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            for row in saveAll:
-                csv_writer.writerow([row[0], row[1], row[2], row[3]])
-
-        os.rename(outputName + ".csv", os.path.join(outputPath, outputName + ".csv"))
 
