@@ -188,8 +188,8 @@ class T5Generator(BaseGenerator):
         sentences2 = [paraphrase]
 
         # Compute embedding for both lists
-        embeddings1 = self.can_model.encode(sentences1, convert_to_tensor=True)
-        embeddings2 = self.can_model.encode(sentences2, convert_to_tensor=True)
+        embeddings1 = self.can_model.encode(sentences1, convert_to_tensor=True, show_progress_bar=False)
+        embeddings2 = self.can_model.encode(sentences2, convert_to_tensor=True, show_progress_bar=False)
 
         # Compute cosine-similarities
         cosine_scores = util.pytorch_cos_sim(embeddings1, embeddings2)
@@ -199,12 +199,12 @@ class T5Generator(BaseGenerator):
 
     def _get_positions(self, original, candidate_paraphrases):
         corpus = self.original_sentences
-        corpus_embeddings = self.can_model.encode(corpus, convert_to_tensor=True)
+        corpus_embeddings = self.can_model.encode(corpus, convert_to_tensor=True, show_progress_bar=False)
         positions = []
         for paraphrase in candidate_paraphrases:
             query = [paraphrase]
             top_k = min(5, len(corpus))
-            query_embedding = self.can_model.encode(query, convert_to_tensor=True)
+            query_embedding = self.can_model.encode(query, convert_to_tensor=True, show_progress_bar=False)
 
             # We use cosine-similarity and torch.topk to find the highest 5 scores
             cos_scores = util.pytorch_cos_sim(query_embedding, corpus_embeddings)[0]
