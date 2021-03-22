@@ -6,6 +6,7 @@ input_file = "babyBonus.csv"
 faq_name = "babyBonus"
 generate_n_paraphrases = 10
 keep_top_k_paraphrases = 5
+assert keep_top_k_paraphrases <= generate_n_paraphrases, "keep_top_k_paraphrases should be <= generate_n_paraphrases"
 
 # output_folder is the script name by default
 output_folder = sys.argv[0].split(".")[0]

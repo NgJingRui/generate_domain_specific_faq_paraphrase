@@ -38,6 +38,7 @@ for opt, arg in opts:
         keep_top_k_paraphrases = int(arg)
         assert type(keep_top_k_paraphrases) == int, "keep_top_k_paraphrases should be an integer"
         assert keep_top_k_paraphrases > 0, "keep_top_k_paraphrases should be positive"
+        assert keep_top_k_paraphrases <= generate_n_paraphrases, "keep_top_k_paraphrases should be <= generate_n_paraphrases"
 
 # 0. Set up folders excluded in .gitignore and folder to store the augmented faq (specified by faq_store)
 set_up_excluded_folders()
