@@ -5,6 +5,7 @@ from sentence_transformers import SentenceTransformer, util
 
 from abbreviation_helper import get_abbreviation_dict, remove_abbreviation_expansion, reinstate_abbreviation_expansion, check_inconsistent
 from bani_work.rajat_work.base import BaseGenerator
+from paraphrase_helper import download_t5_model_if_not_present
 
 
 def set_seed(seed):
@@ -22,7 +23,7 @@ class T5Generator(BaseGenerator):
     """
 
     def __init__(self,
-                 model_path="ramsrigouthamg/t5_paraphraser",
+                 model_path="./models/t5_qqp/",
                  top_p=0.98, num_return=11, max_len=128, top_k=120, is_early_stopping=True,
                  can_model_path="paraphrase-distilroberta-base-v1"):
         """
@@ -57,6 +58,9 @@ class T5Generator(BaseGenerator):
         self.not_generated_sentences = []
 
     def _load_model(self, model_path):
+        if model_path == "./models/t5_qqp/":
+            download_t5_model_if_not_present(model_path)
+
         model = T5ForConditionalGeneration.from_pretrained(model_path)
         model = model.to(self.device)
         return model
@@ -102,7 +106,7 @@ class T5Generator(BaseGenerator):
         return sentences_generated
 
     def batch_generate(self, sentences):
-        # For use in candidate_selection method
+        # For use in _get_positions() method
         self.original_sentences = sentences
         # Reset variables storing inconsistent and not generated sentences
         self.inconsistent_sentences = []
