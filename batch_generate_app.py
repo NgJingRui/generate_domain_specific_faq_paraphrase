@@ -52,7 +52,10 @@ assert len(questions) == len(answers)
 print(f"Succesfully retrieved questions & answers from {data_path}")
 print(f"Augmented FAQ will be stored to {faq_store}.")
 # 2. Preparations before generating paraphrases of the questions
-qqp_producer = T5Generator(model_path="ramsrigouthamg/t5_paraphraser",
+if not os.path.isfile("./models/t5_qqp/config.json") or os.path.isfile("./models/t5_qqp/pytorch_model.bin"):
+    # Run download_model.py
+    import download_model
+qqp_producer = T5Generator(model_path="./models/t5_qqp/",
                            top_p=0.98, num_return=generate_n_paraphrases, max_len=128, top_k=120, is_early_stopping=True)
 
 names = ["T5"]
