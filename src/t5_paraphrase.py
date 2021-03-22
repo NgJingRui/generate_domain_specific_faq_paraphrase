@@ -277,7 +277,12 @@ class T5Generator(BaseGenerator):
             self.original_sentences = [input_question]
             print(self.original_sentences)
         else:
-            data_path = os.path.join("../faq", input_file)
+            # Modifications needed if t5_paraphrase.py is placed in src instead of root directory
+            if os.getcwd().split("/")[-1] == "src":
+                faq_path = "../faq"
+            else:
+                faq_path = "./faq"
+            data_path = os.path.join(faq_path, input_file)
             questions, answers = extract_qa_from_csv(data_path)
             assert len(questions) == len(answers)
 
