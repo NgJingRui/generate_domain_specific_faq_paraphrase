@@ -5,6 +5,7 @@ import csv
 from app_helper import create_directory_if_missing
 import gdown
 
+
 def download_t5_model_if_not_present(model_path):
     create_directory_if_missing(model_path)
     config_file = 'config.json'
@@ -13,7 +14,7 @@ def download_t5_model_if_not_present(model_path):
     config_path = os.path.join(model_path, config_file)
     pytorch_path = os.path.join(model_path, pytorch_file)
 
-    if (os.path.isfile(config_path) and os.path.isfile(pytorch_path)):
+    if os.path.isfile(config_path) and os.path.isfile(pytorch_path):
         print(f"Model found in {model_path}. No downloads needed.")
 
     else:
