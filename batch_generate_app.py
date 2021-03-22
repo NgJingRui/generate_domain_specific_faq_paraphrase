@@ -45,7 +45,7 @@ for opt, arg in opts:
 # 0. Set up folders excluded in .gitignore and folder to store the augmented faq (specified by faq_store)
 set_up_excluded_folders()
 
-faq_store = os.path.join("./outputs", output_folder)
+faq_store = os.path.join("outputs", output_folder)
 create_directory_if_missing(faq_store)
 
 # 1. Load Questions and Answers from FAQ in .csv format
@@ -61,7 +61,7 @@ qqp_producer = T5Generator(model_path="./models/t5_qqp/",
 names = ["T5"]
 quantity = [keep_top_k_paraphrases]
 
-FAQ_obj = FAQ(name=faq_name, questions=questions, answers=answers)
+FAQ_obj = FAQ(name=faq_name, questions=questions[280:], answers=answers[280:])
 
 generatorManager = GenerateManager(
     producers=[
