@@ -5,6 +5,7 @@
 3. [Storage](#storage)
 4. [Use Cases](#use-cases)
 5. [Disclaimer](#disclaimer)
+6. [Author](#author)
 
 ## Introduction
 This repository provides a complete system of generating paraphrases of the questions from a given FAQ dataset or an input question from a given FAQ dataset. The paraphrases are generated using a T5 model fine-tuned on Quora Question Pairs dataset, which is an off-domain labelled paraphrase dataset. Details on training the T5 model can be found in my another [repository](t5-training-paws-or-qqr).
@@ -123,3 +124,11 @@ I have tested and ran all the source code included in this repository using a 13
 
 
 As I do not have a working Windows PC in my possession, I have performed limited testing on a Windows distribution. If there are any errors, it is likely to be specific to the Windows distribution, as some discrepancies exist between MacOS and Windows such as the path string. Please do feel free to raise any issues, and I will provide my solutions promptly.
+
+## Author
+Ng Jing Rui for AY2020/2021 FYP
+
+
+Submitted in Partial Fulfilment of the Requirements for the Degree of Bachelor of Computer Science and Engineering of the Nanyang Technological University
+
+Under the guidance of Assoc. Prof Chng Eng Siong and his team that includes Damien Cheng, Thi Ly and Zin Tun
