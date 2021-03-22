@@ -1,6 +1,7 @@
 from src.paraphrase_helper import extract_qa_from_csv, find_similar_questions_within_faq
 import os
 
+# Update input_file accordingly
 # input_file should be stored in faq folder
 input_file = "babyBonus.csv"
 
