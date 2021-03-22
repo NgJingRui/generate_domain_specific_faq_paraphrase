@@ -1,10 +1,10 @@
 import os, sys, getopt
-from app_helper import handle_path_or_no_path, handle_output_file_variations
-from bani_work.FAQ import FAQ
-from bani_work.generation import GenerateManager
-from t5_paraphrase import T5Generator
-from paraphrase_helper import extract_qa_from_csv, serialize_to_csv, store_questions_to_csv
-from app_helper import set_up_excluded_folders, create_directory_if_missing
+from src.app_helper import handle_path_or_no_path, handle_output_file_variations
+from src.bani_work.FAQ import FAQ
+from src.bani_work.generation import GenerateManager
+from src.t5_paraphrase import T5Generator
+from src.paraphrase_helper import extract_qa_from_csv, serialize_to_csv, store_questions_to_csv
+from src.app_helper import set_up_excluded_folders, create_directory_if_missing
 
 # Compulsory Arguments
 input_file = ""
@@ -53,9 +53,6 @@ assert len(questions) == len(answers)
 print(f"Succesfully retrieved questions & answers from {data_path}")
 print(f"Augmented FAQ will be stored to {faq_store}.")
 # 2. Preparations before generating paraphrases of the questions
-if not os.path.isfile("./models/t5_qqp/config.json") or os.path.isfile("./models/t5_qqp/pytorch_model.bin"):
-    # Run download_model.py
-    import download_model
 qqp_producer = T5Generator(model_path="./models/t5_qqp/",
                            top_p=0.98, num_return=generate_n_paraphrases, max_len=128, top_k=120, is_early_stopping=True)
 

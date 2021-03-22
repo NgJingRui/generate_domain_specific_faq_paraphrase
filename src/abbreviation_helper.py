@@ -1,7 +1,7 @@
 from nltk.tokenize.treebank import TreebankWordDetokenizer
 from nltk.tokenize import word_tokenize
 
-from abbreviation import Abbreviation
+from src.abbreviation import Abbreviation
 from abbreviations import schwartz_hearst
 
 

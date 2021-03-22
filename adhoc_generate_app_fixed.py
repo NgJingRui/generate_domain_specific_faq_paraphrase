@@ -1,6 +1,4 @@
-import os
-
-from t5_paraphrase import T5Generator
+from src.t5_paraphrase import T5Generator
 
 input_question = "Who do I contact for enquiries and feedback on Approved Institutions (AI)?"
 

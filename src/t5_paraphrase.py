@@ -3,9 +3,9 @@ import torch
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 from sentence_transformers import SentenceTransformer, util
 
-from abbreviation_helper import get_abbreviation_dict, remove_abbreviation_expansion, reinstate_abbreviation_expansion, check_inconsistent
-from bani_work.rajat_work.base import BaseGenerator
-from paraphrase_helper import download_t5_model_if_not_present
+from src.abbreviation_helper import get_abbreviation_dict, remove_abbreviation_expansion, reinstate_abbreviation_expansion, check_inconsistent
+from src.bani_work.rajat_work.base import BaseGenerator
+from src.paraphrase_helper import download_t5_model_if_not_present
 
 
 def set_seed(seed):
@@ -271,13 +271,13 @@ class T5Generator(BaseGenerator):
 
     def adhoc_generate(self, input_question, generate_n_paraphrases, keep_top_k_paraphrases, input_file=None):
         import os
-        from paraphrase_helper import extract_qa_from_csv
+        from src.paraphrase_helper import extract_qa_from_csv
 
         if input_file is None:
             self.original_sentences = [input_question]
             print(self.original_sentences)
         else:
-            data_path = os.path.join("./faq", input_file)
+            data_path = os.path.join("../faq", input_file)
             questions, answers = extract_qa_from_csv(data_path)
             assert len(questions) == len(answers)
 

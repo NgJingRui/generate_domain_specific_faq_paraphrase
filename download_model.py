@@ -1,4 +1,4 @@
-from app_helper import create_directory_if_missing
+from src.app_helper import create_directory_if_missing
 import os
 import gdown
 

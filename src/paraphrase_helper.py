@@ -2,7 +2,7 @@ import pandas as pd
 import pickle
 import os
 import csv
-from app_helper import create_directory_if_missing
+from src.app_helper import create_directory_if_missing
 import gdown
 
 
