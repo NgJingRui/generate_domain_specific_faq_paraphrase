@@ -7,3 +7,4 @@ sentence_transformers==0.3.8
 transformers==3.3.1
 nltk==3.5
 typing==3.7.4.3
+gdown==3.10.1
