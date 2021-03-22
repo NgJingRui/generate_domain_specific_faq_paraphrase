@@ -7,3 +7,4 @@ transformers==3.3.1
 nltk==3.5
 typing==3.7.4.3
 gdown==3.10.1
+console-menu==0.6.0
