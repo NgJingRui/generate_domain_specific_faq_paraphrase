@@ -1,5 +1,5 @@
 from src.t5_paraphrase import T5Generator
-
+print("You are currently performing adhoc generate of paraphrases for an input question from a FAQ file")
 input_question = str(input("Generate paraphrases for this question: "))
 
 generate_n_paraphrases = int(input("# of paraphrase to generate for given question, e.g. 10: "))
@@ -30,3 +30,4 @@ print(f"Paraphrases:\n")
 for pcp_tuple in candidate_paraphrases_w_score_position:
     print(f"{count}. {pcp_tuple[0]} ({pcp_tuple[1]}, {pcp_tuple[2]})\n")
     count += 1
+print("DONE!")
