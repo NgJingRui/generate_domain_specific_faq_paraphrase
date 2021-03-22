@@ -90,3 +90,34 @@ def store_questions_to_csv(original_questions, questions, output_path, output_fi
         for question in questions:
             csv_writer.writerow([question, original_questions.index(question)])
     os.rename(output_file, output_path)
+
+
+def find_similar_questions_within_faq(faq_questions):
+    from sentence_transformers import SentenceTransformer, util
+    import torch
+    embedder = SentenceTransformer('paraphrase-distilroberta-base-v1')
+
+    # Corpus with example sentences
+    corpus = faq_questions
+    corpus_embeddings = embedder.encode(corpus, convert_to_tensor=True, show_progress_bar=False)
+
+    queries = faq_questions
+    positions = []
+    # Find the closest 5 sentences of the corpus for each query sentence based on cosine similarity
+    top_k = min(5, len(corpus))
+    found_pairs = []
+    for ind, query in enumerate(queries):
+        query_embedding = embedder.encode(query, convert_to_tensor=True, show_progress_bar=False)
+
+        # We use cosine-similarity and torch.topk to find the highest 5 scores
+        cos_scores = util.pytorch_cos_sim(query_embedding, corpus_embeddings)[0]
+        top_results = torch.topk(cos_scores, k=top_k)
+
+        for score, idx in zip(top_results[0][1:], top_results[1][1:]):
+            if float(score) >= 0.9:
+                if sorted([query, corpus[int(idx)]]) not in found_pairs:
+                    print(f"Question: {query}")
+                    print(f"Similar: {corpus[int(idx)]}")
+                    print(f"({round(float(score), 2)}) or ({round(float(score) * 5, 2)})")
+                    print("\n")
+                    found_pairs.append(sorted([query, corpus[int(idx)]]))
