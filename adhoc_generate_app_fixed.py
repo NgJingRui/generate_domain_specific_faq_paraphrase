@@ -1,5 +1,6 @@
 from src.t5_paraphrase import T5Generator
 
+# Update input_question, generate_n_paraphrases, keep_top_k_paraphrases accordingly
 input_question = "Who do I contact for enquiries and feedback on Approved Institutions (AI)?"
 
 generate_n_paraphrases = 40
