@@ -24,6 +24,8 @@ except getopt.GetoptError:
 
 for opt, arg in opts:
     if opt in ("-i", "--ifile"):
+        # opt can be the input file (must be stored in ./faq)
+        # or the input path (includes the file name) -> (input file can be stored in other folder)
         input_folder, input_file = handle_path_or_no_path(input_folder, arg)
         assert input_file.split(".")[-1] == "csv", \
             "Input file should have a '.csv' extension as only .csv input files are currently supported by the system"
