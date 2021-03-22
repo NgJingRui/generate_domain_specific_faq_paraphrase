@@ -167,8 +167,15 @@ class T5Generator(BaseGenerator):
 
     def _candidate_selection(self, original, generated_paraphrases,
                              lower_bound=4.0, position_choices=[1]):
-
-        # Step 1: Filter by Similarity Scores
+        """
+        This method is used by adhoc_generate() only. In batch generation, similar logic is used, with some modifications
+        :param original: Original sentence used for generating its paraphrases
+        :param generated_paraphrases: List of paraphrases generated
+        :param lower_bound: Value for 1st step of candidate selection process
+        :param position_choices: List of positions to accept in 2nd step of candidate selection process
+        :return:
+        """
+        # 4a. Preparation for Candidate Paraphrase Selection
         similarity_scores = [self._similarity_score(original, paraphrase) for paraphrase in generated_paraphrases]
         positions = self._get_positions(original, generated_paraphrases)
 
@@ -183,9 +190,9 @@ class T5Generator(BaseGenerator):
 
         # Sort by descending score
         paraphrase_score_tuples.sort(key=lambda x: x[1], reverse=True)
-        candidate_paraphrases = [pst_tuple[0] for pst_tuple in paraphrase_score_tuples]
+        # candidate_paraphrases = [pst_tuple[0] for pst_tuple in paraphrase_score_tuples]
 
-        return candidate_paraphrases
+        return paraphrase_score_tuples
 
     def _similarity_score(self, original, paraphrase):
         sentences1 = [original]
@@ -214,7 +221,7 @@ class T5Generator(BaseGenerator):
             cos_scores = util.pytorch_cos_sim(query_embedding, corpus_embeddings)[0]
             top_results = torch.topk(cos_scores, k=top_k)
 
-            corpus_matches = [corpus[idx] for idx in top_results[1]]
+            corpus_matches = [corpus[int(idx)] for idx in top_results[1]]
             positions.append(self.check_position(corpus_matches, original))
 
         return positions
@@ -261,5 +268,29 @@ class T5Generator(BaseGenerator):
         else:
             res = sentence_return
         return res
+
+    def adhoc_generate(self, input_question, generate_n_paraphrases, keep_top_k_paraphrases, input_file=None):
+        import os
+        from paraphrase_helper import extract_qa_from_csv
+
+        if input_file is None:
+            self.original_sentences = [input_question]
+            print(self.original_sentences)
+        else:
+            data_path = os.path.join("./faq", input_file)
+            questions, answers = extract_qa_from_csv(data_path)
+            assert len(questions) == len(answers)
+
+            self.original_sentences = questions
+        self.num_return = generate_n_paraphrases
+        if not check_inconsistent(input_question):
+            paraphrases_generated = self.generate_with_processing(input_question)
+        else:
+            paraphrases_generated = self.generate(input_question)
+
+        candidate_paraphrases = self._candidate_selection(input_question, paraphrases_generated)
+        candidate_paraphrases = candidate_paraphrases[:keep_top_k_paraphrases]
+
+        return candidate_paraphrases
 
 
