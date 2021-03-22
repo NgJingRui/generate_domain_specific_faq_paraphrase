@@ -12,6 +12,9 @@ def set_up_excluded_folders():
 def create_directory_if_missing(folder_name):
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)
+        print(f"{folder_name} created")
+    else:
+        print(f"Directory {folder_name} already exists.")
 
 
 def path_to_folder_file(path):
