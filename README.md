@@ -6,9 +6,10 @@
 4. [Use Cases](#use-cases)
 5. [Disclaimer](#disclaimer)
 6. [Author](#author)
+7. [Resources](#resources)
 
 ## Introduction
-This repository provides a complete system of generating paraphrases of the questions from a given FAQ dataset or an input question from a given FAQ dataset. The paraphrases are generated using a T5 model fine-tuned on Quora Question Pairs dataset, which is an off-domain labelled paraphrase dataset. Details on training the T5 model can be found in my another [repository](t5-training-paws-or-qqr).
+This repository provides a complete system of generating paraphrases of the questions from a given FAQ dataset or an input question from a given FAQ dataset. The paraphrases are generated using a T5 model fine-tuned on Quora Question Pairs dataset, which is an off-domain labelled paraphrase dataset. Details on training the T5 model can be found in my another [repository](https://github.com/NgJingRui/t5-training-paws-or-qqr).
 The system also ensures that the generated paraphrases retains the domain-specific terms found in the original question, thereby ensuring that the paraphrases are domain-specific. 
 The candidate selection process implemented in the system shortlists paraphrases that are semantically similar to their original question and preserves the class label (i.e. most semantically similar to the original question, compared to all other original questions of the FAQ). 
 
@@ -22,6 +23,9 @@ A detailed view of the system aforementioned can be viewed in the image below.
 
 A detailed view of the candidate selection process can be viewed in the image below:
 ![image](candidate_selection.png)
+
+You may view my video presentation by following this [YouTube link](https://youtu.be/OGnkiRLguGI).
+
 ## Installation
 ### Step 1: Clone this repository (Navigate to your desired directory prior to cloning)
 ```powershell
@@ -68,6 +72,14 @@ Launch your command line to perform the following installations:
     pip install -r requirments.txt
     python .\load_punkt.py
     ```
+   
+### Step 3: Downloading the Trained T5 Model
+I have implemented a feature that automatically download my trained T5 model from my Google Drive when you first use the system and does not have the model saved locally.
+
+If you wish to download the model manually, you may visit [my Google Drive folder](https://drive.google.com/drive/folders/1wI977ZFhL7Ac6I1TbJ5BuekNWfsxUeYZ?usp=sharing) to download "config.json" and "pytorch_model.bin".
+
+If you wish to manually train the model, you may [git clone my repository for training the model](https://github.com/NgJingRui/t5-training-paws-or-qqr) and follow the instructions from Step 1 to Step 7.
+
 ## Storage
 You are advised to store your input FAQ datasets in the format of .csv with no headers and in the ./faq folder.
 e.g. "./faq/babyBonus.csv" in this repository
@@ -132,3 +144,15 @@ Ng Jing Rui for AY2020/2021 FYP
 Submitted in Partial Fulfilment of the Requirements for the Degree of Bachelor of Computer Science and Engineering of the Nanyang Technological University
 
 Under the guidance of Assoc. Prof Chng Eng Siong and his team that includes Damien Cheng, Thi Ly and Zin Tun
+
+## Resources
+This section compiles all the resources aforementioned in this READ_ME.md.
+1. [Model's Google Drive Location](https://drive.google.com/drive/folders/1wI977ZFhL7Ac6I1TbJ5BuekNWfsxUeYZ?usp=sharing)
+2. [Model's Training Instructions in GitHub Repository](https://github.com/NgJingRui/t5-training-paws-or-qqr)
+3. [Video Presentation on Youtube](https://youtu.be/OGnkiRLguGI)
+
+Relevant Learning Resources:
+1. [T5's Documentation](https://huggingface.co/transformers/main_classes/model.html?highlight=generate#transformers.generation_utils.GenerationMixin.generate)
+2. [SBERT's Documentation](https://www.sbert.net/)
+3. [Beam Search, Top-k Sampling and Top-p Sampling Explanation](https://huggingface.co/blog/how-to-generate)
+4. [Coursera Course on NLP Specialization](https://www.coursera.org/specializations/natural-language-processing)
