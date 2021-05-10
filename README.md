@@ -78,7 +78,7 @@ I have implemented a feature that automatically download my trained T5 model fro
 
 If you wish to download the model manually, you may visit [my Google Drive folder](https://drive.google.com/drive/folders/1wI977ZFhL7Ac6I1TbJ5BuekNWfsxUeYZ?usp=sharing) to download "config.json" and "pytorch_model.bin".
 
-If you wish to manually train the model, you may [git clone my repository for training the model](https://github.com/NgJingRui/t5-training-paws-or-qqr) and follow the instructions from Step 1 to Step 7.
+If you wish to manually train the model, you may [git clone my repository for training the model](https://github.com/NgJingRui/t5-training-paws-or-qqr) and follow the instructions from Step 1 to Step 5.
 
 ## Storage
 You are advised to store your input FAQ datasets in the format of .csv with no headers and in the ./faq folder.
@@ -139,7 +139,6 @@ As I do not have a working Windows PC in my possession, I have performed limited
 
 ## Author
 Ng Jing Rui for AY2020/2021 FYP
-
 
 Submitted in Partial Fulfilment of the Requirements for the Degree of Bachelor of Computer Science and Engineering of the Nanyang Technological University
 
